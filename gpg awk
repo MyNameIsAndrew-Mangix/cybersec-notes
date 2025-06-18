@@ -1,0 +1,9 @@
+ls *.txt | awk '{
+    sig = $0 ".sig"
+    cmd = "gpg --verify \"" sig "\" \"" $0 "\" 2>/dev/null"
+    if (system(cmd) == 0) {
+        print $0 " is OK"
+    } else {
+        print $0 " has been TAMPERED with"
+    }
+}'
